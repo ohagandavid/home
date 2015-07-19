@@ -1,0 +1,129 @@
+/* ===================================================================
+ * INSTALATION
+ * ===================================================================*/
+
+	1. First install "curl" (sudo apt-get install curl)
+
+	2. Some files are hidden so in order to see them hit Ctrl + H ("show hidden files").
+	
+	3. Install the necessary fonts.
+	
+	4. Move the ".conky-weather" folder into your home folder.
+	
+	5. This conky has a lot of themes each with their own modes.In order to navigate more    	   easily I seperated them into different folders.
+	   First pick your theme.
+	
+	6. Pick between Celsius or Fahrenheit.
+	
+	7. Pick one of the 3 modes.
+	
+	8. Move the chosen ".conkyrc" file into your home folder.
+	
+	9. Open the terminal and type "conky".
+	
+	10. Open the file ".conkyrc" with a text editor, search for "44418" and replace it with the WOEID of your own location. To find your WOEID, browse or search for your city from the Yahoo Weather home page - http://weather.yahoo.com/ . The WOEID is in the URL for the forecast page for that city.
+	
+/* ===================================================================
+ * MODES
+ * ===================================================================*/
+ 
+ 	 There are 3 modes:
+ 	
+ 	1. "colors" will display the weather using a large icon while the colors will change depending on the weather.
+ 	
+ 	
+ 	2. "photos" will display the weather using images.
+ 	
+ 	
+ 	3. "single-color" will display the weather using only the icon while you can manually adjust the color to whatever you like!
+    (the color file is inside the "assets" folder and is called "fav-color.png"!)
+    
+/* ===================================================================
+ * MAKING THEMES
+ * ===================================================================*/
+ 
+ 	I made this conky with extensibility in mind!
+ 	
+ 	If you want to make a theme for it(either for your own theme or your fav one) then please pm me on deviantArt and I will include your theme into the conky! :)
+ 	
+ 	Just make sure that your theme:
+ 	
+ 	1. Provides the 2 unit modes (Celsius and Fahrenheit)
+ 	(to switch between the 2 search for "&u=c" and change it to "&u=f")
+ 	
+ 	2. Provides the 3 modes! ("colors", "photos", "single-color")
+ 	
+ 	3. Keep the general structure of the conky(ie. the right bar should stay as it is)
+ 	
+ 	4. Keep the fonts the same!
+ 	
+ 	   	You can modify the aligment of the left side of the conky.
+ 	   
+ 	   	You can add remove weather info on the left side.
+ 	   
+ 	   	You can add a clock.
+ 	   
+ 	   	You can change the font size.
+ 	   	
+ 	   	You can change font-colors.
+ 	   
+ /* ===================================================================
+ * TROUBLESHOOTING & NOTES
+ * ===================================================================*/
+ 
+ 	In case the theme doesn´t display properly try to change  "own_window_type_dock" to normal/conky/desktop and refresh by "killall conky" & "conky".
+ 	
+ 	To move the conky around use "gap_x" and "gap_y"
+ 	
+ 	Don´t forget to install "curl"!!! :)
+ 	
+ /* ===================================================================
+ * ALIGNMENTS & ADDING A CLOCK
+ * ===================================================================*/
+ 
+	 The most difficult part about a conky is alignment.Everytime you add text in one place it kicks the rest out of alignment.
+	 In order to make it easier to customize this conky, I tried to set it up so that you can manipulate the left side of the conky without affecting the right side!
+	 Inside the "conkyrc" file all the info is written beneath the "TEXT".
+	 All of the info for the left side is written at the bottom part of the conky.
+	 All the info for the right side is written at the top part.(with exception of images!)
+	 That way you can move around the text on the left anywhere you want.
+	 The only exception are images!The position of an image is determined with "-p AxB" and they are independent of the position of the text.
+	 
+	 To add a clock copy-paste this on lines 61 & 62:
+	 
+	 	| ${font Droid Sans :size=14}${alignr 140}${voffset 280}${time %H:%M %p} |
+		| ${font Droid Sans :size=14}${alignr 140}${voffset 10}${time %A %B %d}  |
+	
+ 	This will draw a simple clock and date beneath the current temperature!
+ 	(to move it up or down increase/decrease the number 280)
+
+ 	1. "${font}" is used to customize the font.
+ 	
+ 	
+ 	2. "${voffset}" is used to customize the vertical offset of that line.
+ 	As you can see it is relative to other parts.The vertical offset of the clock is 280 and the vertical offset of the date is NOT 290 but 10!!(experiment a little around to get an idea)
+ 	
+ 	
+ 	3. "${goto}" & "{alignr}" is used to move the clock horizontally!
+ 	(alignr=align right, alignc=align center)
+ 	(to align left you use "goto" and not "alignl"!!!)
+ 	
+ 	The difference between the 2 is how the text expands.
+ 	If you use "align" it will expand towards left.
+ 	
+ 	"Goto" is used in order to align something on the left as the text will expand towards right!
+ 	To move them around you write a number next to it!
+ 	
+ 	
+ 	
+ 	4. "${ %H %M...}" is the format of the time and/or date!
+ 	   
+ 	   To see all the various values visit this site: 
+ 	   
+ 	   		"http://pubs.opengroup.org/onlinepubs/000095399/utilities/date.html"
+ 	
+ 	
+/* ===================================================================*/
+
+ 	   
+	Salute :) 	   

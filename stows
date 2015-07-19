@@ -1,0 +1,7 @@
+stow emacs &
+stow compton &
+stow screen &
+stow openbox &
+stow tilda &
+stow tint2 &
+stow ssh &
