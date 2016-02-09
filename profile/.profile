@@ -8,23 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 # SAF scripts
 PATH="$HOME/src/DevBinUtils:$PATH"
 PATH="$HOME/lib/SAFBuild:$PATH"
@@ -37,10 +20,7 @@ export PERL5LIB=$HOME/lib/perl
 export ANT_BUILD_HOME=$HOME/.antBuild
 export ANT_HOME=$HOME/apps/ant/ant-current
 export MAVEN_HOME=$HOME/apps/maven/maven-current
-#export JBOSS_HOME=$HOME/apps/jboss/jboss-as-7.1.1.Final
-#export DEPLOY_HOME=${JBOSS_HOME}/standalone/deployments
 export DEPLOY_TEMP=/tmp
-#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export FTD_DIR=${HOME}/src/Python/InputFiles
 export PATH=$PATH:${HOME}/apps/play/play-2.2.1/
 export PATH=$PATH:${HOME}/.npm/bin
