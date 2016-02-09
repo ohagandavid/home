@@ -13,10 +13,10 @@ Commonly used config files.
 
 Some Programs represented
 
-*Conky (Harmattan Themes)
+*StumpWM
 
-*Tint2 (Numix Theme)
+*Zsh
 
-*Tilda (Using github source for Solarized Themes)
+*Emacs
 
-*Compton (Ooh Shiny)
+*Screen
