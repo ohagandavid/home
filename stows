@@ -1,7 +1,8 @@
 stow emacs &
-stow compton &
 stow screen &
-stow openbox &
-stow tilda &
-stow tint2 &
 stow ssh &
+stow stumpwm &
+stow zsh &
+stow -t $HOME/.oh-my-zsh/custom zsh_custom &
+stow profile &
+stow grep &
