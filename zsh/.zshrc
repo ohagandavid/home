@@ -52,7 +52,7 @@ DEFAULT_USER="david"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git command-not-found common-aliases debian docker encode64 fbterm jsontools screen sprunge mouse)
+plugins=(git command-not-found common-aliases debian docker encode64 fbterm jsontools screen sprunge mouse fasd)
 
 
 # User configuration
