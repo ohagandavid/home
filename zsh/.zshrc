@@ -51,7 +51,8 @@ DEFAULT_USER="david"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found common-aliases debian docker encode64 fbterm jira jsontools mercurial screen sprunge SAF_java mouse)
+
+plugins=(git command-not-found common-aliases debian docker encode64 fbterm jira jsontools mercurial screen sprunge SAF_java mouse fasd)
 
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
