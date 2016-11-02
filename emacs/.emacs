@@ -16,10 +16,14 @@
              (cons "." "~/.emacs.d/backups/"))
 
 ;;Package Management
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("org" . "http://orgmode.org/elpa/")))
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+  )
 (require 'auto-package-update)
 
 
@@ -35,14 +39,87 @@
 
 (add-hook 'window-setup-hook 'on-after-init)
 
-
-
 ;; stop using the arrow keys
 (global-unset-key [left])
 (global-unset-key [up])
 (global-unset-key [right])
 (global-unset-key [down])
 
+;;Shinies
+(beacon-mode 1)
+
+(totd-start)
+
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
+(add-hook 'local-write-file-hooks
+	  (lambda ()
+	    (delete-trailing-whitespace)
+	    nil))
+
+(put 'downcase-region 'disabled nil)
+
+(define-key global-map [select] 'end-of-line)
+
+;;Mode specific munges.
+
+;; (require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+;; (autoload 'apache-mode "apache-mode" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . apache-mode))
+;; (add-to-list 'auto-mode-alist '("httpd\\.conf\\'" . apache-mode))
+;; (add-to-list 'auto-mode-alist '("srm\\.conf\\'" . apache-mode))
+;; (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
+;; (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
+
+;; (add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
+;; (add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
+
+;; (add-to-list 'auto-mode-alist '(".ssh/config\\'"       . ssh-config-mode))
+;; (add-to-list 'auto-mode-alist '("sshd?_config\\'"      . ssh-config-mode))
+;; (add-to-list 'auto-mode-alist '("known_hosts\\'"       . ssh-known-hosts-mode))
+;; (add-to-list 'auto-mode-alist '("authorized_keys2?\\'" . ssh-authorized-keys-mode))
+;; (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
+
+(require 'indent-guide)
+
+(require 'ignoramus)
+(ignoramus-setup)
+
+(require 'java-file-create)
+
+(when (and (not window-system)
+	   (string-match "^xterm" (getenv "TERM")))
+  (require 'xterm-title)
+  (xterm-title-mode 1)
+
+;;Beautify LISP
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+(require 'rainbow-blocks)
+(add-hook 'lisp-mode-hook 'rainbow-blocks-mode)
+
+(require 'adjust-parens)
+(add-hook 'emacs-lisp-mode-hook #'adjust-parens-mode)
+
+(require 'indent-guide)
+
+(require 'on-screen)
+(on-screen-global-mode +1)
+
+(require 'toggle-quotes)
+(global-set-key (kbd "C-'") 'toggle-quotes)
+
+(require 'multi-term)
+(setq multi-term-program "/usr/bin/zsh")
 
 ;;SSH tweaks
 (require 'tramp)
@@ -58,61 +135,3 @@
 ;;         (let ((method (file-remote-p name 'method)))
 ;;         (when (stringp method)
 ;;         (member method '("su" "sudo"))))))))
-
-(add-to-list 'auto-mode-alist '(".ssh/config\\'"       . ssh-config-mode))
-(add-to-list 'auto-mode-alist '("sshd?_config\\'"      . ssh-config-mode))
-(add-to-list 'auto-mode-alist '("known_hosts\\'"       . ssh-known-hosts-mode))
-(add-to-list 'auto-mode-alist '("authorized_keys2?\\'" . ssh-authorized-keys-mode))
-(add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
-
-
-(require 'on-screen)
-(on-screen-global-mode +1)
-
-
-(require 'multi-term)
-(setq multi-term-program "/usr/bin/zsh")
-
-;;General Beauty and Modes
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
-
-(beacon-mode 1)
-
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-
-(add-hook 'local-write-file-hooks
-	  (lambda ()
-	    (delete-trailing-whitespace)
-	    nil))
-
-(put 'downcase-region 'disabled nil)
-
-(autoload 'apache-mode "apache-mode" nil t) (add-to-list 'auto-mode-alist '("\\.htaccess\\'" . apache-mode)) (add-to-list 'auto-mode-alist '("httpd\\.conf\\'" . apache-mode)) (add-to-list 'auto-mode-alist '("srm\\.conf\\'" . apache-mode)) (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode)) (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
-
-(define-key global-map [select] 'end-of-line)
-
-(add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
-(add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
-
-(require 'ignoramus)
-(ignoramus-setup)
-
-(require 'java-file-create)
-
-
-;;Beautify LISP
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-(require 'rainbow-blocks)
-(add-hook 'lisp-mode-hook 'rainbow-blocks-mode)
-
-(require 'adjust-parens)
-(add-hook 'emacs-lisp-mode-hook #'adjust-parens-mode)
-
-(require 'indent-guide)
